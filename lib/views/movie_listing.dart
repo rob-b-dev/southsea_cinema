@@ -15,7 +15,22 @@ class MovieListing extends StatelessWidget {
         elevation: 0,
       ),
       drawer: const NavDrawer(),
-      body: const SizedBox.shrink(),
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        // Container has one child; Column groups the film details vertically.
+        child: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Spirited Away', style: cinemaHeaderStyle),
+            SizedBox(height: 8),
+            Text(
+              'A young girl enters a mysterious spirit world and must find a way to save her parents.',
+              style: TextStyle(color: cinemaFontMuted),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
