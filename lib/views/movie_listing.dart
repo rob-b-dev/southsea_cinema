@@ -78,11 +78,13 @@ class _MovieListingState extends State<MovieListing> {
         style: TextStyle(color: cinemaFontMuted),
       ),
       const SizedBox(height: 16),
-      // Row keeps the film facts together on one line.
-      const Row(
+      // Wrap keeps the film facts together but moves to a new line if the
+      // available width (such as one side of the wide layout) is too narrow.
+      const Wrap(
+        spacing: 16,
+        runSpacing: 4,
         children: [
           Text('Runtime: 125 min', style: TextStyle(color: cinemaFontWhite)),
-          SizedBox(width: 16),
           Text('Rating: PG', style: TextStyle(color: cinemaFontWhite)),
         ],
       ),
