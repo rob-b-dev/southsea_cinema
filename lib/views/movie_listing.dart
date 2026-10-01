@@ -16,6 +16,7 @@ class _MovieListingState extends State<MovieListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cinemaBackground,
       appBar: AppBar(
         title: const Text(appTitle, style: cinemaHeaderStyle),
         backgroundColor: cinemaSurface,
@@ -26,13 +27,27 @@ class _MovieListingState extends State<MovieListing> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: cinemaSurface,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: cinemaBrandDark),
+            ),
             // Container has one child, so Column groups the listing vertically.
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Spirited Away', style: cinemaHeaderStyle),
+                const Text(
+                  'Now showing',
+                  style: TextStyle(color: cinemaBrandLight),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Spirited Away',
+                  style: cinemaHeaderStyle.copyWith(fontSize: 26),
+                ),
                 const SizedBox(height: 8),
                 const Text(
                   'A young girl enters a mysterious spirit world and must find a way to save her parents.',
@@ -67,6 +82,10 @@ class _MovieListingState extends State<MovieListing> {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: cinemaBrand,
+                    foregroundColor: cinemaBackground,
+                  ),
                   onPressed: () {
                     // This demo gives feedback without creating a basket yet.
                     setState(() {
@@ -81,7 +100,7 @@ class _MovieListingState extends State<MovieListing> {
                   const SizedBox(height: 12),
                   Text(
                     _bookingFeedback!,
-                    style: const TextStyle(color: cinemaFontWhite),
+                    style: const TextStyle(color: cinemaBrandLight),
                   ),
                 ],
               ],
