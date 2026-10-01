@@ -17,7 +17,7 @@ class MovieListing extends StatelessWidget {
       drawer: const NavDrawer(),
       body: Container(
         padding: const EdgeInsets.all(16),
-        // Container has one child; Column groups the film details vertically.
+        // Container has one child, so Column groups the film details vertically.
         child: const Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,6 +27,15 @@ class MovieListing extends StatelessWidget {
             Text(
               'A young girl enters a mysterious spirit world and must find a way to save her parents.',
               style: TextStyle(color: cinemaFontMuted),
+            ),
+            SizedBox(height: 16),
+            // Row keeps the film facts together on one line.
+            Row(
+              children: [
+                Text('Runtime: 125 min', style: TextStyle(color: cinemaFontWhite)),
+                SizedBox(width: 16),
+                Text('Rating: PG', style: TextStyle(color: cinemaFontWhite)),
+              ],
             ),
           ],
         ),
