@@ -6,7 +6,7 @@ import 'package:southsea_cinema/views/movie_listing.dart';
 void main() {
   testWidgets('Basic app loading test', (WidgetTester tester) async {
     await tester.pumpWidget(const SouthseaCinemaApp());
-    expect(find.text('Welcome to Southsea Cinema'), findsOneWidget);
+    expect(find.text('Spirited Away'), findsOneWidget);
   });
 
   testWidgets('Movie listing shows the film details and booking controls', (
