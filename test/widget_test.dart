@@ -21,6 +21,7 @@ void main() {
       expect(find.text('Spirited Away'), findsOneWidget);
       expect(find.text('Back to the Future'), findsOneWidget);
       expect(find.text('Book now'), findsNWidgets(2));
+      expect(find.bySemanticsLabel('Spirited Away poster'), findsOneWidget);
     });
   });
 

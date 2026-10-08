@@ -23,6 +23,7 @@ class MovieCard extends StatelessWidget {
               width: 90,
               height: 130,
               fit: BoxFit.cover,
+              semanticLabel: '${movie.title} poster',
             ),
             const SizedBox(width: 16),
             Expanded(
