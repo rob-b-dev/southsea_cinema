@@ -45,9 +45,19 @@ class _MovieListingState extends State<MovieListing> {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: Column(children: _filmDetails())),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _filmDetails(),
+                        ),
+                      ),
                       const SizedBox(width: 24),
-                      Expanded(child: Column(children: _bookingSection())),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _bookingSection(),
+                        ),
+                      ),
                     ],
                   );
                 }

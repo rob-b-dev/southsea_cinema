@@ -59,6 +59,21 @@ void main() {
   });
 
   group('Movie listing widget tests', () {
+    testWidgets('Wide layout keeps the film details left aligned', (
+      WidgetTester tester,
+    ) async {
+      tester.view.physicalSize = const Size(1200, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.reset);
+
+      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+
+      expect(
+        tester.getTopLeft(find.text(movie.title)).dx,
+        tester.getTopLeft(find.text(movie.synopsis)).dx,
+      );
+    });
+
     testWidgets('Movie listing shows the film details and booking controls', (
       WidgetTester tester,
     ) async {
