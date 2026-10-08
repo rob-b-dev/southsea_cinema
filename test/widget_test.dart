@@ -82,6 +82,8 @@ void main() {
 
       expect(find.text('Spirited Away'), findsOneWidget);
       expect(find.text('Runtime: 125 min'), findsOneWidget);
+      expect(find.text(movie.screeningTime), findsOneWidget);
+      expect(find.bySemanticsLabel('Spirited Away poster'), findsOneWidget);
       expect(find.text('Rating: PG'), findsOneWidget);
       expect(find.byType(DropdownMenu<int>), findsOneWidget);
       expect(find.text('Add to order'), findsOneWidget);

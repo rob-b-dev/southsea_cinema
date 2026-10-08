@@ -85,6 +85,19 @@ class _MovieListingState extends State<MovieListing> {
         widget.movie.title,
         style: cinemaHeaderStyle.copyWith(fontSize: 26),
       ),
+      const SizedBox(height: 12),
+      Image.asset(
+        widget.movie.posterPath,
+        width: 120,
+        height: 175,
+        fit: BoxFit.cover,
+        semanticLabel: '${widget.movie.title} poster',
+      ),
+      const SizedBox(height: 12),
+      Text(
+        widget.movie.screeningTime,
+        style: const TextStyle(color: cinemaFontWhite),
+      ),
       const SizedBox(height: 8),
       Text(
         widget.movie.synopsis,
