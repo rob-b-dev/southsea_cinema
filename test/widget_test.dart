@@ -58,59 +58,61 @@ void main() {
     });
   });
 
-  testWidgets('Movie listing shows the film details and booking controls', (
-    WidgetTester tester,
-  ) async {
-    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+  group('Movie listing widget tests', () {
+    testWidgets('Movie listing shows the film details and booking controls', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
-    expect(find.text('Spirited Away'), findsOneWidget);
-    expect(find.text('Runtime: 125 min'), findsOneWidget);
-    expect(find.text('Rating: PG'), findsOneWidget);
-    expect(find.byType(DropdownMenu<int>), findsOneWidget);
-    expect(find.text('Add to order'), findsOneWidget);
-    expect(find.text('Added 1 ticket to your order.'), findsNothing);
-  });
+      expect(find.text('Spirited Away'), findsOneWidget);
+      expect(find.text('Runtime: 125 min'), findsOneWidget);
+      expect(find.text('Rating: PG'), findsOneWidget);
+      expect(find.byType(DropdownMenu<int>), findsOneWidget);
+      expect(find.text('Add to order'), findsOneWidget);
+      expect(find.text('Added 1 ticket to your order.'), findsNothing);
+    });
 
-  testWidgets('Selecting a ticket quantity updates the booking feedback', (
-    WidgetTester tester,
-  ) async {
-    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+    testWidgets('Selecting a ticket quantity updates the booking feedback', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
-    await tester.tap(find.byType(DropdownMenu<int>));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('3 tickets').last);
-    await tester.pumpAndSettle();
+      await tester.tap(find.byType(DropdownMenu<int>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('3 tickets').last);
+      await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Add to order'));
-    await tester.pump();
+      await tester.tap(find.text('Add to order'));
+      await tester.pump();
 
-    expect(find.text('Added 3 tickets to your order.'), findsOneWidget);
-  });
+      expect(find.text('Added 3 tickets to your order.'), findsOneWidget);
+    });
 
-  testWidgets('Booking a single ticket shows singular feedback', (
-    WidgetTester tester,
-  ) async {
-    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+    testWidgets('Booking a single ticket shows singular feedback', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
-    await tester.tap(find.text('Add to order'));
-    await tester.pump();
+      await tester.tap(find.text('Add to order'));
+      await tester.pump();
 
-    expect(find.text('Added 1 ticket to your order.'), findsOneWidget);
-  });
+      expect(find.text('Added 1 ticket to your order.'), findsOneWidget);
+    });
 
-  testWidgets('Booking several tickets shows plural feedback', (
-    WidgetTester tester,
-  ) async {
-    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+    testWidgets('Booking several tickets shows plural feedback', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
-    await tester.tap(find.byType(DropdownMenu<int>));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('5 tickets').last);
-    await tester.pumpAndSettle();
+      await tester.tap(find.byType(DropdownMenu<int>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('5 tickets').last);
+      await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Add to order'));
-    await tester.pump();
+      await tester.tap(find.text('Add to order'));
+      await tester.pump();
 
-    expect(find.text('Added 5 tickets to your order.'), findsOneWidget);
+      expect(find.text('Added 5 tickets to your order.'), findsOneWidget);
+    });
   });
 }
