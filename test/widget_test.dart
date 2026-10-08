@@ -24,6 +24,40 @@ void main() {
     });
   });
 
+  group('Navigation widget tests', () {
+    testWidgets('Tapping Book now opens the listing for that film', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Book now').last);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(MovieListing), findsOneWidget);
+      expect(find.text('Back to the Future'), findsOneWidget);
+      expect(find.text('Runtime: 116 min'), findsOneWidget);
+      expect(find.text('Rating: PG'), findsOneWidget);
+      expect(find.text('Price: £6.50'), findsOneWidget);
+      expect(find.text('Spirited Away'), findsNothing);
+    });
+
+    testWidgets('Booking from the listing shows the confirmation message', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Book now').first);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Add to order'));
+      await tester.pump();
+
+      expect(find.text('Added 1 ticket to your order.'), findsOneWidget);
+    });
+  });
+
   testWidgets('Movie listing shows the film details and booking controls', (
     WidgetTester tester,
   ) async {
