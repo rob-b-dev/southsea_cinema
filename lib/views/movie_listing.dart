@@ -41,7 +41,7 @@ class _MovieListingState extends State<MovieListing> {
             // switch between a narrow Column and a wide Row.
             child: LayoutBuilder(
               builder: (context, constraints) {
-                if (constraints.maxWidth > 600) {
+                if (constraints.maxWidth > wideLayoutBreakpoint) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
