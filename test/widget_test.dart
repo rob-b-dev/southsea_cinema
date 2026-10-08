@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/repositories/movie_repository.dart';
@@ -8,9 +9,19 @@ import 'package:southsea_cinema/views/movie_listing.dart';
 void main() {
   final Movie movie = MovieRepository().getMovies().first;
 
-  testWidgets('Basic app loading test', (WidgetTester tester) async {
-    await tester.pumpWidget(const SouthseaCinemaApp());
-    expect(find.text('Spirited Away'), findsOneWidget);
+  group('Home page widget tests', () {
+    testWidgets(
+        'Home page shows the app title, film titles and booking buttons', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
+
+      expect(find.text(appTitle), findsOneWidget);
+      expect(find.text('Spirited Away'), findsOneWidget);
+      expect(find.text('Back to the Future'), findsOneWidget);
+      expect(find.text('Book now'), findsNWidgets(2));
+    });
   });
 
   testWidgets('Movie listing shows the film details and booking controls', (
