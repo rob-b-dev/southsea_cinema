@@ -95,6 +95,10 @@ class _MovieListingState extends State<MovieListing> {
             'Rating: ${widget.movie.ageRating}',
             style: const TextStyle(color: cinemaFontWhite),
           ),
+          Text(
+            'Price: ${widget.movie.formattedPrice}',
+            style: const TextStyle(color: cinemaFontWhite),
+          ),
         ],
       ),
       const SizedBox(height: 24),
