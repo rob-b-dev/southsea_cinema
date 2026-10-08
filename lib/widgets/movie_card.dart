@@ -15,57 +15,74 @@ class MovieCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              movie.posterPath,
-              width: 90,
-              height: 130,
-              fit: BoxFit.cover,
-              semanticLabel: '${movie.title} poster',
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Flexible(
+                  child: Text(
+                    movie.title,
+                    style: cinemaHeaderStyle.copyWith(color: cinemaBrand),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '(${movie.ageRating})',
+                  style: const TextStyle(color: cinemaFontMuted),
+                ),
+              ],
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(movie.title, style: cinemaHeaderStyle),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Rating: ${movie.ageRating}',
-                    style: const TextStyle(color: cinemaBrandLight),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
+            const SizedBox(height: 12),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(
+                  movie.posterPath,
+                  width: 90,
+                  height: 130,
+                  fit: BoxFit.cover,
+                  semanticLabel: '${movie.title} poster',
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
                     movie.synopsis,
-                    style: const TextStyle(color: cinemaFontMuted),
+                    style: const TextStyle(color: cinemaFontWhite),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
                     movie.screeningTime,
                     style: const TextStyle(color: cinemaFontWhite),
                   ),
-                  const SizedBox(height: 12),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: cinemaBrand,
-                      foregroundColor: cinemaBackground,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MovieListing(movie: movie);
-                          },
-                        ),
-                      );
-                    },
-                    child: const Text('Book now'),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: cinemaBrand,
+                    foregroundColor: cinemaBackground,
                   ),
-                ],
-              ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MovieListing(movie: movie);
+                        },
+                      ),
+                    );
+                  },
+                  child: const Text('Book now'),
+                ),
+              ],
             ),
           ],
         ),
