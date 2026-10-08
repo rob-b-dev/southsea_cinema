@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
+import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/repositories/movie_repository.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 
 void main() {
+  final Movie movie = MovieRepository().getMovies().first;
+
   testWidgets('Basic app loading test', (WidgetTester tester) async {
     await tester.pumpWidget(const SouthseaCinemaApp());
     expect(find.text('Spirited Away'), findsOneWidget);
@@ -12,7 +16,7 @@ void main() {
   testWidgets('Movie listing shows the film details and booking controls', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing()));
+    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
     expect(find.text('Spirited Away'), findsOneWidget);
     expect(find.text('Runtime: 125 min'), findsOneWidget);
@@ -25,7 +29,7 @@ void main() {
   testWidgets('Selecting a ticket quantity updates the booking feedback', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing()));
+    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
     await tester.tap(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();
@@ -41,7 +45,7 @@ void main() {
   testWidgets('Booking a single ticket shows singular feedback', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing()));
+    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
     await tester.tap(find.text('Add to order'));
     await tester.pump();
@@ -52,7 +56,7 @@ void main() {
   testWidgets('Booking several tickets shows plural feedback', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing()));
+    await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
 
     await tester.tap(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();

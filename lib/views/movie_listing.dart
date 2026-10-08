@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 class MovieListing extends StatefulWidget {
-  const MovieListing({super.key});
+  final Movie movie;
+
+  const MovieListing({super.key, required this.movie});
 
   @override
   State<MovieListing> createState() => _MovieListingState();
@@ -69,23 +72,29 @@ class _MovieListingState extends State<MovieListing> {
       ),
       const SizedBox(height: 8),
       Text(
-        'Spirited Away',
+        widget.movie.title,
         style: cinemaHeaderStyle.copyWith(fontSize: 26),
       ),
       const SizedBox(height: 8),
-      const Text(
-        'A young girl enters a mysterious spirit world and must find a way to save her parents.',
-        style: TextStyle(color: cinemaFontMuted),
+      Text(
+        widget.movie.synopsis,
+        style: const TextStyle(color: cinemaFontMuted),
       ),
       const SizedBox(height: 16),
       // Wrap keeps the film facts together but moves to a new line if the
       // available width (such as one side of the wide layout) is too narrow.
-      const Wrap(
+      Wrap(
         spacing: 16,
         runSpacing: 4,
         children: [
-          Text('Runtime: 125 min', style: TextStyle(color: cinemaFontWhite)),
-          Text('Rating: PG', style: TextStyle(color: cinemaFontWhite)),
+          Text(
+            'Runtime: ${widget.movie.runtimeMinutes} min',
+            style: const TextStyle(color: cinemaFontWhite),
+          ),
+          Text(
+            'Rating: ${widget.movie.ageRating}',
+            style: const TextStyle(color: cinemaFontWhite),
+          ),
         ],
       ),
       const SizedBox(height: 24),
