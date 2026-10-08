@@ -1,15 +1,22 @@
+// Dart extension package
 import 'package:flutter/material.dart';
+
+// Views and constants
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/views/home_view.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 
+// Application entry point
 void main() {
+  
+  // Method to run dart within a flutter application
   runApp(const SouthseaCinemaApp());
 }
 
 class SouthseaCinemaApp extends StatelessWidget {
   const SouthseaCinemaApp({super.key});
 
+  // Annotation
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

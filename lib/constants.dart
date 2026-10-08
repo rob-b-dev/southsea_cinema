@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// Design Tokens
+
 const String appTitle = 'Southsea Cinema';
 
 const Color cinemaBrand = Color(0xFF55BEDE);
