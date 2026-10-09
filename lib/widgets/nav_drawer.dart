@@ -18,7 +18,7 @@ class NavDrawer extends StatelessWidget {
           children: [
             Container(
               height: 60,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               color: cinemaSurface,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,9 +32,7 @@ class NavDrawer extends StatelessWidget {
                   ),
                   IconButton(
                     icon: const Icon(Icons.close, color: cinemaBrand),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ],
               ),

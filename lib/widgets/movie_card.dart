@@ -68,19 +68,15 @@ class MovieCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: () {
-                    // Navigator.push adds the listing page on top of the
-                    // navigation stack, passing this card's film through
-                    // the MovieListing constructor.
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return MovieListing(movie: movie);
-                        },
-                      ),
-                    );
-                  },
+                  // Navigator.push adds the listing page on top of the
+                  // navigation stack, passing this card's film through the
+                  // MovieListing constructor.
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MovieListing(movie: movie),
+                    ),
+                  ),
                   child: const Text('Book now'),
                 ),
               ],
