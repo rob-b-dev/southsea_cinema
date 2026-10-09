@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 
-/// The side menu shared by every screen.
-///
+// The side menu shared by every screen.
 /// Only Home is listed. The listing page needs a specific film passed in,
 /// which a menu link cannot choose, so it is opened from a movie card instead.
 class NavDrawer extends StatelessWidget {

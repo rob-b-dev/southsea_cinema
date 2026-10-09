@@ -4,8 +4,7 @@ import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/movie_poster.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-/// The booking page for a single film.
-///
+// The booking page for a single film.
 /// It is a [StatefulWidget] because the ticket quantity and the booking
 /// message change while the page is open. The film is passed in by
 /// `MovieCard` when the user presses "Book now".
@@ -150,6 +149,7 @@ class _MovieListingState extends State<MovieListing> {
           if (value != null) {
             // setState rebuilds the page with the chosen quantity.
             setState(() => _ticketQuantity = value);
+            debugPrint('Tickets: $_ticketQuantity');
           }
         },
       ),

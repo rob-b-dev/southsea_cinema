@@ -1,15 +1,12 @@
 import 'package:southsea_cinema/models/movie.dart';
 
-/// Supplies film data to the rest of the app.
-///
+// Supplies film data to the rest of the app.
 /// This is the repository layer. Screens ask the repository for films instead
 /// of creating the data themselves, so the data source can later change (for
 /// example to a database or a web API) without changing any widgets.
 class MovieRepository {
-  /// Returns every film currently showing.
-  ///
-  /// The films are mock data for now. The list is `const`, so the same
-  /// instance is reused on every call.
+  // Returns every film currently showing.
+  /// The films are mock data for now. The list is `const`, so the same instance is reused on every call.
   List<Movie> getMovies() {
     return const [
       Movie(
@@ -38,7 +35,6 @@ class MovieRepository {
   }
 
   /// Returns the film with the matching [id], or `null` if there is none.
-  ///
   /// The `?` in `Movie?` makes the return type nullable, so Dart's null
   /// safety makes callers handle the missing case before using the result.
   Movie? getMovieById(String id) {

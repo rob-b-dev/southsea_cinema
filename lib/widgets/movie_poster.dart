@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/models/movie.dart';
 
-/// A film's poster image, labelled for screen readers.
-///
-/// Used by both the home screen cards and the listing page, which only differ
-/// in the size they show it at.
+// A film's poster image, labelled for screen readers.
+// Used by both the home screen cards and the listing page, which only differ in the size they show it at.
 class MoviePoster extends StatelessWidget {
   final Movie movie;
   final double width;

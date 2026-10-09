@@ -4,12 +4,11 @@ import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/movie_poster.dart';
 
-/// A summary card for one film on the home screen.
-///
+// A summary card for one film on the home screen.
 /// Pressing "Book now" opens [MovieListing] for this card's [movie].
 class MovieCard extends StatelessWidget {
-  /// The film this card displays.
-  final Movie movie;
+
+  final Movie movie; // Movie with declared type
 
   const MovieCard({super.key, required this.movie});
 
@@ -23,8 +22,7 @@ class MovieCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Baseline alignment lines up the title and rating text even
-            // though they use different font sizes.
+            // Baseline alignment lines up the title and rating text even though they use different font sizes.
             Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
@@ -69,8 +67,7 @@ class MovieCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 ElevatedButton(
                   // Navigator.push adds the listing page on top of the
-                  // navigation stack, passing this card's film through the
-                  // MovieListing constructor.
+                  // navigation stack, passing this card's film through the MovieListing constructor.
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
