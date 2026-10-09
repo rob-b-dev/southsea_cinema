@@ -3,17 +3,29 @@ import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
+/// The booking page for a single film.
+///
+/// It is a [StatefulWidget] because the ticket quantity and the booking
+/// message change while the page is open. The film is passed in by
+/// `MovieCard` when the user presses "Book now".
 class MovieListing extends StatefulWidget {
+  /// The film to show. The state class reads it as `widget.movie`.
   final Movie movie;
 
   const MovieListing({super.key, required this.movie});
 
+  // createState links this widget to the State object that holds the
+  // changing data. Flutter keeps that object alive across rebuilds, while the
+  // widget itself is recreated.
   @override
   State<MovieListing> createState() => _MovieListingState();
 }
 
+// The leading underscore makes this class private to this file.
 class _MovieListingState extends State<MovieListing> {
   int _ticketQuantity = 1;
+
+  // Null until "Add to order" is pressed; the ? makes the type nullable.
   String? _bookingFeedback;
 
   @override
@@ -42,6 +54,7 @@ class _MovieListingState extends State<MovieListing> {
             child: LayoutBuilder(
               builder: (context, constraints) {
                 if (constraints.maxWidth > wideLayoutBreakpoint) {
+                  // Expanded splits the width equally between the columns.
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -61,6 +74,8 @@ class _MovieListingState extends State<MovieListing> {
                     ],
                   );
                 }
+                // The spread operator (...) inserts both lists of widgets
+                // into a single Column.
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,6 +89,9 @@ class _MovieListingState extends State<MovieListing> {
     );
   }
 
+  /// Builds the title, poster and film facts for `widget.movie`.
+  ///
+  /// Returning a list lets the narrow and wide layouts reuse the same widgets.
   List<Widget> _filmDetails() {
     return [
       const Text(
@@ -110,6 +128,7 @@ class _MovieListingState extends State<MovieListing> {
         spacing: 16,
         runSpacing: 4,
         children: [
+          // ${...} inserts the value of an expression into a string.
           Text(
             'Runtime: ${widget.movie.runtimeMinutes} min',
             style: const TextStyle(color: cinemaFontWhite),
@@ -128,8 +147,11 @@ class _MovieListingState extends State<MovieListing> {
     ];
   }
 
+  /// Builds the ticket dropdown, the "Add to order" button and the booking
+  /// message.
   List<Widget> _bookingSection() {
     return [
+      // <int> is a type argument: every entry in this dropdown holds an int.
       DropdownMenu<int>(
         label: const Text('Tickets'),
         initialSelection: _ticketQuantity,
@@ -140,6 +162,8 @@ class _MovieListingState extends State<MovieListing> {
           DropdownMenuEntry(value: 4, label: '4 tickets'),
           DropdownMenuEntry(value: 5, label: '5 tickets'),
         ],
+        // value is int? because nothing may be selected, so it is checked
+        // before use.
         onSelected: (int? value) {
           if (value != null) {
             // setState rebuilds the page with the chosen quantity.
@@ -155,6 +179,7 @@ class _MovieListingState extends State<MovieListing> {
         ),
         onPressed: () {
           // This demo gives feedback without creating a basket yet.
+          // The conditional (? :) picks the singular or plural message.
           setState(() {
             _bookingFeedback = _ticketQuantity == 1
                 ? 'Added 1 ticket to your order.'
@@ -163,6 +188,8 @@ class _MovieListingState extends State<MovieListing> {
         },
         child: const Text('Add to order'),
       ),
+      // A collection if only adds the message once it exists. The ! tells
+      // Dart the value is not null, which the if has just checked.
       if (_bookingFeedback != null) ...[
         const SizedBox(height: 12),
         Text(

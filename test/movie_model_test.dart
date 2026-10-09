@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/models/movie.dart';
 
+/// Builds a test film, letting each test change only the values it checks.
 Movie buildMovie({String ageRating = 'PG', double price = 6.0}) {
   return Movie(
     id: 'test-film',

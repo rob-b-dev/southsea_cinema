@@ -15,6 +15,8 @@ void main() {
       final MovieRepository repository = MovieRepository();
       final List<Movie> movies = repository.getMovies();
 
+      // A Set ignores duplicates, so its size matches the list only if
+      // every id is unique.
       final Set<String> ids = {};
       for (final Movie movie in movies) {
         expect(movie.id, isNotEmpty);

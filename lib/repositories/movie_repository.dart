@@ -1,6 +1,15 @@
 import 'package:southsea_cinema/models/movie.dart';
 
+/// Supplies film data to the rest of the app.
+///
+/// This is the repository layer. Screens ask the repository for films instead
+/// of creating the data themselves, so the data source can later change (for
+/// example to a database or a web API) without changing any widgets.
 class MovieRepository {
+  /// Returns every film currently showing.
+  ///
+  /// The films are mock data for now. The list is `const`, so the same
+  /// instance is reused on every call.
   List<Movie> getMovies() {
     return const [
       Movie(
@@ -28,6 +37,10 @@ class MovieRepository {
     ];
   }
 
+  /// Returns the film with the matching [id], or `null` if there is none.
+  ///
+  /// The `?` in `Movie?` makes the return type nullable, so Dart's null
+  /// safety makes callers handle the missing case before using the result.
   Movie? getMovieById(String id) {
     for (final movie in getMovies()) {
       if (movie.id == id) {
@@ -37,10 +50,14 @@ class MovieRepository {
     return null;
   }
 
+  /// Returns only the films with the given age [rating].
   List<Movie> getMoviesByAgeRating(String rating) {
+    // where() keeps the items for which the function returns true, and
+    // toList() turns that lazy result into a List.
     return getMovies().where((movie) => movie.ageRating == rating).toList();
   }
 
+  /// Returns only the films whose ticket price is below [maxPrice].
   List<Movie> getMoviesUnderPrice(double maxPrice) {
     return getMovies().where((movie) => movie.price < maxPrice).toList();
   }

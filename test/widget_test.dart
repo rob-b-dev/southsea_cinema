@@ -7,6 +7,7 @@ import 'package:southsea_cinema/repositories/movie_repository.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 
 void main() {
+  // Real repository data, so the tests check the films users actually see.
   final Movie movie = MovieRepository().getMovies().first;
 
   group('Home page widget tests', () {
@@ -14,6 +15,8 @@ void main() {
         'Home page shows the app title, film titles and booking buttons', (
       WidgetTester tester,
     ) async {
+      // pumpWidget renders the app, and pumpAndSettle waits until all
+      // frames and animations have finished.
       await tester.pumpWidget(const SouthseaCinemaApp());
       await tester.pumpAndSettle();
 
@@ -34,6 +37,7 @@ void main() {
       await tester.pumpWidget(const SouthseaCinemaApp());
       await tester.pumpAndSettle();
 
+      // pumpAndSettle lets the page transition finish after navigating.
       await tester.tap(find.text('Book now').last);
       await tester.pumpAndSettle();
 
@@ -54,6 +58,7 @@ void main() {
       await tester.tap(find.text('Book now').first);
       await tester.pumpAndSettle();
 
+      // A single pump is enough to render the setState change.
       await tester.tap(find.text('Add to order'));
       await tester.pump();
 
@@ -65,6 +70,8 @@ void main() {
     testWidgets('Wide layout keeps the film details left aligned', (
       WidgetTester tester,
     ) async {
+      // A wide test window forces the side-by-side layout. addTearDown
+      // resets it so other tests keep the default size.
       tester.view.physicalSize = const Size(1200, 800);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.reset);
