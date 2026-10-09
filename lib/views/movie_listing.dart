@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/widgets/movie_poster.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 /// The booking page for a single film.
@@ -98,13 +99,7 @@ class _MovieListingState extends State<MovieListing> {
         style: cinemaHeaderStyle.copyWith(fontSize: 26),
       ),
       const SizedBox(height: 12),
-      Image.asset(
-        widget.movie.posterPath,
-        width: 120,
-        height: 175,
-        fit: BoxFit.cover,
-        semanticLabel: '${widget.movie.title} poster',
-      ),
+      MoviePoster(movie: widget.movie, width: 120, height: 175),
       const SizedBox(height: 12),
       Text(
         widget.movie.screeningTime,

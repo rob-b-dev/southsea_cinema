@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/widgets/movie_poster.dart';
 
 /// A summary card for one film on the home screen.
 ///
@@ -46,13 +47,7 @@ class MovieCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  movie.posterPath,
-                  width: 90,
-                  height: 130,
-                  fit: BoxFit.cover,
-                  semanticLabel: '${movie.title} poster',
-                ),
+                MoviePoster(movie: movie, width: 90, height: 130),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
