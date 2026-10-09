@@ -31,13 +31,7 @@ class _MovieListingState extends State<MovieListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cinemaBackground,
-      appBar: AppBar(
-        title: const Text(appTitle, style: cinemaHeaderStyle),
-        backgroundColor: cinemaSurface,
-        iconTheme: const IconThemeData(color: cinemaBrand),
-        elevation: 0,
-      ),
+      appBar: AppBar(title: const Text(appTitle)),
       drawer: const NavDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -173,10 +167,6 @@ class _MovieListingState extends State<MovieListing> {
       ),
       const SizedBox(height: 16),
       ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: cinemaBrand,
-          foregroundColor: cinemaBackground,
-        ),
         onPressed: () {
           // This demo gives feedback without creating a basket yet.
           // The conditional (? :) picks the singular or plural message.

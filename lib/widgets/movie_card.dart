@@ -73,10 +73,6 @@ class MovieCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: cinemaBrand,
-                    foregroundColor: cinemaBackground,
-                  ),
                   onPressed: () {
                     // Navigator.push adds the listing page on top of the
                     // navigation stack, passing this card's film through

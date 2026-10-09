@@ -18,15 +18,7 @@ class HomeView extends StatelessWidget {
     final List<Movie> movies = repository.getMovies();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          appTitle,
-          style: cinemaHeaderStyle,
-        ),
-        backgroundColor: cinemaSurface,
-        iconTheme: const IconThemeData(color: cinemaBrand),
-        elevation: 0,
-      ),
+      appBar: AppBar(title: const Text(appTitle)),
       drawer: const NavDrawer(),
       // ListView.builder only builds the cards that are on screen, calling
       // itemBuilder once for each visible index.

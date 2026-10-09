@@ -36,6 +36,20 @@ class SouthseaCinemaApp extends StatelessWidget {
           primary: cinemaBrand,
           surface: cinemaSurface,
         ),
+        // Shared styling for every AppBar and ElevatedButton, so screens do
+        // not repeat it.
+        appBarTheme: const AppBarTheme(
+          backgroundColor: cinemaSurface,
+          iconTheme: IconThemeData(color: cinemaBrand),
+          titleTextStyle: cinemaHeaderStyle,
+          elevation: 0,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: cinemaBrand,
+            foregroundColor: cinemaBackground,
+          ),
+        ),
       ),
       initialRoute: '/',
       // Each named route maps a path to a function that builds that screen.
