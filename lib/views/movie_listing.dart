@@ -90,7 +90,7 @@ class _MovieListingState extends State<MovieListing> {
     return [
       const Text(
         'Now showing',
-        style: TextStyle(color: cinemaBrandLight),
+        style: cinemaHighlightStyle,
       ),
       const SizedBox(height: 8),
       Text(
@@ -108,12 +108,12 @@ class _MovieListingState extends State<MovieListing> {
       const SizedBox(height: 12),
       Text(
         widget.movie.screeningTime,
-        style: const TextStyle(color: cinemaFontWhite),
+        style: cinemaBodyStyle,
       ),
       const SizedBox(height: 8),
       Text(
         widget.movie.synopsis,
-        style: const TextStyle(color: cinemaFontMuted),
+        style: cinemaMutedStyle,
       ),
       const SizedBox(height: 16),
       // Wrap keeps the film facts together but moves to a new line if the
@@ -125,15 +125,15 @@ class _MovieListingState extends State<MovieListing> {
           // ${...} inserts the value of an expression into a string.
           Text(
             'Runtime: ${widget.movie.runtimeMinutes} min',
-            style: const TextStyle(color: cinemaFontWhite),
+            style: cinemaBodyStyle,
           ),
           Text(
             'Rating: ${widget.movie.ageRating}',
-            style: const TextStyle(color: cinemaFontWhite),
+            style: cinemaBodyStyle,
           ),
           Text(
             'Price: ${widget.movie.formattedPrice}',
-            style: const TextStyle(color: cinemaFontWhite),
+            style: cinemaBodyStyle,
           ),
         ],
       ),
@@ -184,7 +184,7 @@ class _MovieListingState extends State<MovieListing> {
         const SizedBox(height: 12),
         Text(
           _bookingFeedback!,
-          style: const TextStyle(color: cinemaBrandLight),
+          style: cinemaHighlightStyle,
         ),
       ],
     ];

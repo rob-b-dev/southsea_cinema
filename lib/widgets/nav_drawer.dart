@@ -60,7 +60,7 @@ class DrawerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title, style: const TextStyle(color: cinemaFontWhite)),
+      title: Text(title, style: cinemaBodyStyle),
       onTap: () {
         Navigator.pop(context);
         if (route != null) {

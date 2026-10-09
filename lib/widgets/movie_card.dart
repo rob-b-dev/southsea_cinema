@@ -38,7 +38,7 @@ class MovieCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   '(${movie.ageRating})',
-                  style: const TextStyle(color: cinemaFontMuted),
+                  style: cinemaMutedStyle,
                 ),
               ],
             ),
@@ -57,7 +57,7 @@ class MovieCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     movie.synopsis,
-                    style: const TextStyle(color: cinemaFontWhite),
+                    style: cinemaBodyStyle,
                   ),
                 ),
               ],
@@ -68,7 +68,7 @@ class MovieCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     movie.screeningTime,
-                    style: const TextStyle(color: cinemaFontWhite),
+                    style: cinemaBodyStyle,
                   ),
                 ),
                 const SizedBox(width: 8),

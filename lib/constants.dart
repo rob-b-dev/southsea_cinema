@@ -21,6 +21,15 @@ const Color cinemaSurface = Color(0xFF242936);
 /// details and booking section side by side instead of stacked.
 const double wideLayoutBreakpoint = 600;
 
+/// White style for body text such as synopses and screening times.
+const TextStyle cinemaBodyStyle = TextStyle(color: cinemaFontWhite);
+
+/// Grey style for secondary text such as age ratings.
+const TextStyle cinemaMutedStyle = TextStyle(color: cinemaFontMuted);
+
+/// Light blue style for highlighted text such as booking messages.
+const TextStyle cinemaHighlightStyle = TextStyle(color: cinemaBrandLight);
+
 /// Bold white style used for app bar titles and film titles.
 const TextStyle cinemaHeaderStyle = TextStyle(
   color: cinemaFontWhite,
