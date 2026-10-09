@@ -17,6 +17,9 @@ const Color cinemaFontWhite = Color(0xFFFFFFFF);
 const Color cinemaFontMuted = Color(0xFF8A90A0);
 const Color cinemaSurface = Color(0xFF242936);
 
+/// Most tickets a customer can add to one order.
+const int maxTicketsPerOrder = 5;
+
 /// Width in logical pixels above which the movie listing shows the film
 /// details and booking section side by side instead of stacked.
 const double wideLayoutBreakpoint = 600;

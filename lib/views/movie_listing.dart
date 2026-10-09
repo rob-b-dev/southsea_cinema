@@ -117,19 +117,14 @@ class _MovieListingState extends State<MovieListing> {
         spacing: 16,
         runSpacing: 4,
         children: [
-          // ${...} inserts the value of an expression into a string.
-          Text(
+          // A collection for adds one Text per fact, and ${...} inserts the
+          // value of an expression into each string.
+          for (final String fact in [
             'Runtime: ${widget.movie.runtimeMinutes} min',
-            style: cinemaBodyStyle,
-          ),
-          Text(
             'Rating: ${widget.movie.ageRating}',
-            style: cinemaBodyStyle,
-          ),
-          Text(
             'Price: ${widget.movie.formattedPrice}',
-            style: cinemaBodyStyle,
-          ),
+          ])
+            Text(fact, style: cinemaBodyStyle),
         ],
       ),
       const SizedBox(height: 24),
@@ -144,12 +139,10 @@ class _MovieListingState extends State<MovieListing> {
       DropdownMenu<int>(
         label: const Text('Tickets'),
         initialSelection: _ticketQuantity,
-        dropdownMenuEntries: const [
-          DropdownMenuEntry(value: 1, label: '1 ticket'),
-          DropdownMenuEntry(value: 2, label: '2 tickets'),
-          DropdownMenuEntry(value: 3, label: '3 tickets'),
-          DropdownMenuEntry(value: 4, label: '4 tickets'),
-          DropdownMenuEntry(value: 5, label: '5 tickets'),
+        // One entry for each quantity from 1 up to the maximum.
+        dropdownMenuEntries: [
+          for (int quantity = 1; quantity <= maxTicketsPerOrder; quantity++)
+            DropdownMenuEntry(value: quantity, label: _ticketLabel(quantity)),
         ],
         // value is int? because nothing may be selected, so it is checked
         // before use.
@@ -164,11 +157,9 @@ class _MovieListingState extends State<MovieListing> {
       ElevatedButton(
         onPressed: () {
           // This demo gives feedback without creating a basket yet.
-          // The conditional (? :) picks the singular or plural message.
           setState(() {
-            _bookingFeedback = _ticketQuantity == 1
-                ? 'Added 1 ticket to your order.'
-                : 'Added $_ticketQuantity tickets to your order.';
+            _bookingFeedback =
+                'Added ${_ticketLabel(_ticketQuantity)} to your order.';
           });
         },
         child: const Text('Add to order'),
@@ -184,4 +175,11 @@ class _MovieListingState extends State<MovieListing> {
       ],
     ];
   }
+}
+
+/// Returns the quantity with the right word, such as `'1 ticket'` or
+/// `'3 tickets'`, so the dropdown and the booking message always match.
+String _ticketLabel(int quantity) {
+  // The conditional (? :) picks the singular or plural word.
+  return quantity == 1 ? '1 ticket' : '$quantity tickets';
 }

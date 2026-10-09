@@ -5,10 +5,8 @@ import 'package:southsea_cinema/views/home_view.dart';
 // MovieCard with Navigator.push instead of through a named route.
 // import 'package:southsea_cinema/views/movie_listing.dart';
 
-/// Entry point of the app.
-///
-/// [runApp] makes [SouthseaCinemaApp] the root of the widget tree and draws it
-/// on screen.
+// Entry point of the app.
+/// [runApp] makes [SouthseaCinemaApp] the root of the widget tree and draws it on screen.
 void main() {
   runApp(const SouthseaCinemaApp());
 }
