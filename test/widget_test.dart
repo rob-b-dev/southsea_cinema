@@ -10,15 +10,32 @@ void main() {
   // Real repository data, so the tests check the films users actually see.
   final Movie movie = MovieRepository().getMovies().first;
 
+  // Renders the whole app. pumpAndSettle waits until all frames and
+  // animations have finished, so the home page is fully built.
+  Future<void> pumpApp(WidgetTester tester) async {
+    await tester.pumpWidget(const SouthseaCinemaApp());
+    await tester.pumpAndSettle();
+  }
+
+  // Renders the listing page on its own for the test film.
+  Future<void> pumpListing(WidgetTester tester) {
+    return tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+  }
+
+  // Opens the ticket dropdown and picks the entry with the given label.
+  Future<void> selectTickets(WidgetTester tester, String label) async {
+    await tester.tap(find.byType(DropdownMenu<int>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(label).last);
+    await tester.pumpAndSettle();
+  }
+
   group('Home page widget tests', () {
     testWidgets(
         'Home page shows the app title, film titles and booking buttons', (
       WidgetTester tester,
     ) async {
-      // pumpWidget renders the app, and pumpAndSettle waits until all
-      // frames and animations have finished.
-      await tester.pumpWidget(const SouthseaCinemaApp());
-      await tester.pumpAndSettle();
+      await pumpApp(tester);
 
       expect(find.text(appTitle), findsOneWidget);
       expect(find.text('Spirited Away'), findsOneWidget);
@@ -34,8 +51,7 @@ void main() {
     testWidgets('Tapping Book now opens the listing for that film', (
       WidgetTester tester,
     ) async {
-      await tester.pumpWidget(const SouthseaCinemaApp());
-      await tester.pumpAndSettle();
+      await pumpApp(tester);
 
       // pumpAndSettle lets the page transition finish after navigating.
       await tester.tap(find.text('Book now').last);
@@ -52,8 +68,7 @@ void main() {
     testWidgets('Booking from the listing shows the confirmation message', (
       WidgetTester tester,
     ) async {
-      await tester.pumpWidget(const SouthseaCinemaApp());
-      await tester.pumpAndSettle();
+      await pumpApp(tester);
 
       await tester.tap(find.text('Book now').first);
       await tester.pumpAndSettle();
@@ -76,7 +91,7 @@ void main() {
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.reset);
 
-      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+      await pumpListing(tester);
 
       expect(
         tester.getTopLeft(find.text(movie.title)).dx,
@@ -87,7 +102,7 @@ void main() {
     testWidgets('Movie listing shows the film details and booking controls', (
       WidgetTester tester,
     ) async {
-      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+      await pumpListing(tester);
 
       expect(find.text('Spirited Away'), findsOneWidget);
       expect(find.text('Runtime: 125 min'), findsOneWidget);
@@ -102,12 +117,9 @@ void main() {
     testWidgets('Selecting a ticket quantity updates the booking feedback', (
       WidgetTester tester,
     ) async {
-      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+      await pumpListing(tester);
 
-      await tester.tap(find.byType(DropdownMenu<int>));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('3 tickets').last);
-      await tester.pumpAndSettle();
+      await selectTickets(tester, '3 tickets');
 
       await tester.tap(find.text('Add to order'));
       await tester.pump();
@@ -118,7 +130,7 @@ void main() {
     testWidgets('Booking a single ticket shows singular feedback', (
       WidgetTester tester,
     ) async {
-      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+      await pumpListing(tester);
 
       await tester.tap(find.text('Add to order'));
       await tester.pump();
@@ -129,12 +141,9 @@ void main() {
     testWidgets('Booking several tickets shows plural feedback', (
       WidgetTester tester,
     ) async {
-      await tester.pumpWidget(MaterialApp(home: MovieListing(movie: movie)));
+      await pumpListing(tester);
 
-      await tester.tap(find.byType(DropdownMenu<int>));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('5 tickets').last);
-      await tester.pumpAndSettle();
+      await selectTickets(tester, '5 tickets');
 
       await tester.tap(find.text('Add to order'));
       await tester.pump();
