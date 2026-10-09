@@ -24,9 +24,7 @@ class _MovieListingState extends State<MovieListing> {
         elevation: 0,
       ),
       drawer: const NavDrawer(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
+      body: Container(
             margin: const EdgeInsets.all(16),
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -56,8 +54,6 @@ class _MovieListingState extends State<MovieListing> {
               },
             ),
           ),
-        ),
-      ),
     );
   }
 
