@@ -97,7 +97,10 @@ class _MovieListingState extends State<MovieListing> {
                 child: const Text('Add to order'),
               ),
               const SizedBox(height: 12),
-              Text(_bookingMessage),
+              Text(
+                _bookingMessage,
+                style: const TextStyle(color: AppColors.brand),
+              ),
             ],
           ),
         ),
