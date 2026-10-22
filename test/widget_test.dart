@@ -32,7 +32,7 @@ void main() {
     expect(find.text('BOOK NOW'), findsNWidgets(2));
   });
 
-  testWidgets('Booking a film opens its listing and adds to order', (
+  testWidgets('Booking films from the home page shows each film listing', (
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(const SouthseaCinemaApp());
@@ -48,6 +48,21 @@ void main() {
     await tester.tap(find.text('Add to order'));
     await tester.pump();
     expect(find.text('Added 1 ticket to your order.'), findsOneWidget);
+
+    // Simulate the browser/system back button to pop back to the home page.
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+    expect(find.byType(MovieListing), findsNothing);
+
+    // The second card may be below the screen, so scroll it into view first.
+    await tester.ensureVisible(find.text('BOOK NOW').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('BOOK NOW').last);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Back to the Future (PG)'), findsOneWidget);
+    expect(find.text('Tickets (£6.00 each)'), findsOneWidget);
+    expect(find.text('Added 1 ticket to your order.'), findsNothing);
   });
 
   testWidgets('Movie listing shows the film details and booking controls', (
