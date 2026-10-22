@@ -25,7 +25,6 @@ class _MovieListingState extends State<MovieListing> {
   @override
   // Returns a Widget; Flutter passes in context, this widget's location in the tree.
   Widget build(BuildContext context) {
-
     // Call Scaffold constructor and return contents to be rendered in widget tree.
     // Scaffold is a high-level widget that provides a standard layout for a page.
     return Scaffold(

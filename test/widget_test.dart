@@ -35,7 +35,8 @@ void main() {
   testWidgets('Movie listing shows the film details and booking controls', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
+    await tester
+        .pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
 
     expect(find.text('Spirited Away (PG)'), findsOneWidget);
     expect(find.text('Thursday 22 Oct 2026  18:00'), findsOneWidget);
@@ -47,7 +48,8 @@ void main() {
   testWidgets('Selecting a ticket quantity updates the booking feedback', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
+    await tester
+        .pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
 
     await tester.tap(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();
@@ -63,7 +65,8 @@ void main() {
   testWidgets('Booking a single ticket shows singular feedback', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
+    await tester
+        .pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
 
     await tester.tap(find.text('Add to order'));
     await tester.pump();
@@ -74,7 +77,8 @@ void main() {
   testWidgets('Booking several tickets shows plural feedback', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
+    await tester
+        .pumpWidget(const MaterialApp(home: MovieListing(movie: testMovie)));
 
     await tester.tap(find.byType(DropdownMenu<int>));
     await tester.pumpAndSettle();

@@ -5,12 +5,12 @@ import 'package:southsea_cinema/views/home_view.dart';
 
 // Entry point - initialize app.
 void main() {
-  runApp(const SouthseaCinemaApp()); // compile-time constant to satisfy linter works same without as app runs once.
+  runApp(
+      const SouthseaCinemaApp()); // compile-time constant to satisfy linter works same without as app runs once.
 }
 
 // App root widget - declare config -- sits at top of widget tree.
 class SouthseaCinemaApp extends StatelessWidget {
-
   // Const constructor; calls superclass constructor.
   // Linting encourages const constructor implementation as super.key uses final modifier.
   const SouthseaCinemaApp({super.key});
@@ -21,7 +21,7 @@ class SouthseaCinemaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Call MaterialApp constructor and return contents to be rendered in widget tree.
     /// MaterialApp is a high-level widget that implements material design setup for everything beneath it,
-    /// sitting below its parent SouthseaCinemaApp in the widget tree. 
+    /// sitting below its parent SouthseaCinemaApp in the widget tree.
     return MaterialApp(
       title: '$appTitle & Arts Centre',
       debugShowCheckedModeBanner: false,
@@ -35,7 +35,7 @@ class SouthseaCinemaApp extends StatelessWidget {
           surface: AppColors.surface,
         ),
       ),
-    
+
       initialRoute: '/', // Route on app start.
       // Routes per view.
       routes: {

@@ -23,7 +23,8 @@ void main() {
       expect(movie.posterPath, 'assets/images/spirited_away.png');
     });
 
-    test('formattedPrice shows a whole-pound price with two decimal places', () {
+    test('formattedPrice shows a whole-pound price with two decimal places',
+        () {
       const movie = Movie(
         id: 'test',
         title: 'Test Film',

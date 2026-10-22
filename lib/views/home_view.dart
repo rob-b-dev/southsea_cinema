@@ -8,7 +8,6 @@ import 'package:southsea_cinema/widgets/movie_card.dart';
 
 // Home view widget - displayed under '/' route.
 class HomeView extends StatelessWidget {
-
   // Const constructor; calls superclass constructor.
   const HomeView({super.key});
 
@@ -24,7 +23,6 @@ class HomeView extends StatelessWidget {
     // Scaffold is a high-level widget that provides a standard layout for a page.
     // Child of HomeView in the widget tree; acts as parent for the page's other widgets through nested structure.
     return Scaffold(
-      
       appBar: const CinemaAppBar(),
       drawer: const NavDrawer(),
       // ListView.builder builds cards lazily, only when they scroll into view.
