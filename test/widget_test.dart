@@ -32,6 +32,24 @@ void main() {
     expect(find.text('BOOK NOW'), findsNWidgets(2));
   });
 
+  testWidgets('Booking a film opens its listing and adds to order', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const SouthseaCinemaApp());
+
+    // Two BOOK NOW buttons match, so .first selects the Spirited Away card.
+    await tester.tap(find.text('BOOK NOW').first);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieListing), findsOneWidget);
+    expect(find.text('Spirited Away (PG)'), findsOneWidget);
+    expect(find.text('Tickets (£7.50 each)'), findsOneWidget);
+
+    await tester.tap(find.text('Add to order'));
+    await tester.pump();
+    expect(find.text('Added 1 ticket to your order.'), findsOneWidget);
+  });
+
   testWidgets('Movie listing shows the film details and booking controls', (
     WidgetTester tester,
   ) async {
