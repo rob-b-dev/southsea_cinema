@@ -6,7 +6,7 @@ import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/app_bar.dart';
 
 // Movie listing widget - shows the film selected on the home page.
-// Stateful as the ticket quantity and booking feedback change while the page is open.
+// Stateful as the ticket quantity and booking message change while the page is open.
 class MovieListing extends StatefulWidget {
   final Movie movie; // film passed in from the MovieCard that was tapped
 
@@ -19,7 +19,7 @@ class MovieListing extends StatefulWidget {
 
 class _MovieListingState extends State<MovieListing> {
   int _ticketQuantity = 1;
-  String? _bookingFeedback;
+  String _bookingMessage = '';
 
   // Implements the abstract build method from State.
   @override
@@ -39,112 +39,66 @@ class _MovieListingState extends State<MovieListing> {
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(16),
           ),
-          // LayoutBuilder reports the available width so the page can
-          // switch between a narrow Column and a wide Row.
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth > 600) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(child: Column(children: _filmDetails())),
-                    const SizedBox(width: 24),
-                    Expanded(child: Column(children: _bookingSection())),
-                  ],
-                );
-              }
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [..._filmDetails(), ..._bookingSection()],
-              );
-            },
+          // widget.movie reads the film from the parent StatefulWidget.
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${widget.movie.title} (${widget.movie.ageRating})',
+                style: cinemaHeaderStyle.copyWith(fontSize: 26),
+              ),
+              const SizedBox(height: 16),
+              Image.asset(
+                widget.movie.posterPath,
+                width: 100,
+                height: 150,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(height: 16),
+              Text(widget.movie.screeningTime),
+              const SizedBox(height: 8),
+              Text(
+                widget.movie.synopsis,
+                style: const TextStyle(color: AppColors.textMuted),
+              ),
+              const SizedBox(height: 24),
+              Text('Tickets (${widget.movie.formattedPrice} each)'),
+              const SizedBox(height: 12),
+              DropdownMenu<int>(
+                initialSelection: _ticketQuantity,
+                onSelected: (int? value) {
+                  if (value != null) {
+                    // setState rebuilds the page with the chosen quantity.
+                    setState(() {
+                      _ticketQuantity = value;
+                    });
+                  }
+                },
+                dropdownMenuEntries: const [
+                  DropdownMenuEntry(value: 1, label: '1'),
+                  DropdownMenuEntry(value: 2, label: '2'),
+                  DropdownMenuEntry(value: 3, label: '3'),
+                  DropdownMenuEntry(value: 4, label: '4'),
+                  DropdownMenuEntry(value: 5, label: '5'),
+                ],
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                style: cinemaButtonStyle,
+                onPressed: () {
+                  setState(() {
+                    _bookingMessage =
+                        'Added $_ticketQuantity tickets to the order';
+                  });
+                },
+                child: const Text('Add to order'),
+              ),
+              const SizedBox(height: 12),
+              Text(_bookingMessage),
+            ],
           ),
         ),
       ),
     );
-  }
-
-  // widget.movie reads the film from the parent StatefulWidget.
-  List<Widget> _filmDetails() {
-    return [
-      const Text(
-        'Now showing',
-        style: TextStyle(color: AppColors.brandLight),
-      ),
-      const SizedBox(height: 8),
-      Text(
-        '${widget.movie.title} (${widget.movie.ageRating})',
-        style: cinemaHeaderStyle.copyWith(fontSize: 26),
-      ),
-      const SizedBox(height: 16),
-      Image.asset(
-        widget.movie.posterPath,
-        width: 100,
-        height: 150,
-        fit: BoxFit.cover,
-      ),
-      const SizedBox(height: 16),
-      Text(
-        widget.movie.screeningTime,
-        style: const TextStyle(color: AppColors.textPrimary),
-      ),
-      const SizedBox(height: 8),
-      Text(
-        widget.movie.synopsis,
-        style: const TextStyle(color: AppColors.textMuted),
-      ),
-      const SizedBox(height: 24),
-    ];
-  }
-
-  List<Widget> _bookingSection() {
-    return [
-      Text(
-        'Tickets (${widget.movie.formattedPrice} each)',
-        style: const TextStyle(color: AppColors.textPrimary),
-      ),
-      const SizedBox(height: 12),
-      DropdownMenu<int>(
-        label: const Text('Tickets'),
-        initialSelection: _ticketQuantity,
-        dropdownMenuEntries: const [
-          DropdownMenuEntry(value: 1, label: '1 ticket'),
-          DropdownMenuEntry(value: 2, label: '2 tickets'),
-          DropdownMenuEntry(value: 3, label: '3 tickets'),
-          DropdownMenuEntry(value: 4, label: '4 tickets'),
-          DropdownMenuEntry(value: 5, label: '5 tickets'),
-        ],
-        onSelected: (int? value) {
-          if (value != null) {
-            // setState rebuilds the page with the chosen quantity.
-            setState(() => _ticketQuantity = value);
-          }
-        },
-      ),
-      const SizedBox(height: 16),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.brand,
-          foregroundColor: AppColors.background,
-        ),
-        onPressed: () {
-          // This demo gives feedback without creating a basket yet.
-          setState(() {
-            _bookingFeedback = _ticketQuantity == 1
-                ? 'Added 1 ticket to your order.'
-                : 'Added $_ticketQuantity tickets to your order.';
-          });
-        },
-        child: const Text('Add to order'),
-      ),
-      if (_bookingFeedback != null) ...[
-        const SizedBox(height: 12),
-        Text(
-          _bookingFeedback!,
-          style: const TextStyle(color: AppColors.brandLight),
-        ),
-      ],
-    ];
   }
 }

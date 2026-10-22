@@ -23,24 +23,12 @@ class MovieCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Wrap moves the age rating onto a new line if the title is too long.
-            Wrap(
-              spacing: 8,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Text(
-                  movie.title,
-                  style: const TextStyle(
-                    color: AppColors.brand,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  '(${movie.ageRating})',
-                  style: const TextStyle(color: AppColors.textMuted),
-                ),
-              ],
+            Text(
+              '${movie.title} (${movie.ageRating})',
+              style: cinemaHeaderStyle.copyWith(
+                color: AppColors.brand,
+                fontSize: 22,
+              ),
             ),
             const SizedBox(height: 12),
             // Poster on the left, synopsis on the right.
@@ -55,12 +43,7 @@ class MovieCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 // Expanded constrains the text to the remaining width so it wraps instead of overflowing.
-                Expanded(
-                  child: Text(
-                    movie.synopsis,
-                    style: const TextStyle(color: AppColors.textPrimary),
-                  ),
-                ),
+                Expanded(child: Text(movie.synopsis)),
               ],
             ),
             const SizedBox(height: 16),
@@ -68,12 +51,7 @@ class MovieCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Text(
-                    movie.screeningTime,
-                    style: const TextStyle(color: AppColors.textPrimary),
-                  ),
-                ),
+                Expanded(child: Text(movie.screeningTime)),
                 ElevatedButton(
                   style: cinemaButtonStyle,
                   // Push the listing for this card's film on top of the navigation stack.
