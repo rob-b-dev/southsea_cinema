@@ -38,7 +38,6 @@ class _MovieListingState extends State<MovieListing> {
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.brandDark),
           ),
           // LayoutBuilder reports the available width so the page can
           // switch between a narrow Column and a wide Row.
