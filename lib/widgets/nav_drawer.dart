@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:southsea_cinema/constants.dart';
+import 'package:flutter/material.dart'; // Required Flutter standard library.
+import 'package:southsea_cinema/constants.dart'; // Global constants for config.
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
@@ -7,7 +7,7 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: cinemaBackground,
+      backgroundColor: AppColors.background,
       child: SafeArea(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -15,7 +15,7 @@ class NavDrawer extends StatelessWidget {
             Container(
               height: 60,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              color: cinemaSurface,
+              color: AppColors.surface,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -27,7 +27,7 @@ class NavDrawer extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close, color: cinemaBrand),
+                    icon: const Icon(Icons.close, color: AppColors.brand),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -53,7 +53,7 @@ class DrawerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title, style: const TextStyle(color: cinemaFontWhite)),
+      title: Text(title, style: const TextStyle(color: AppColors.textPrimary)),
       onTap: () {
         Navigator.pop(context);
         if (route != null) {
