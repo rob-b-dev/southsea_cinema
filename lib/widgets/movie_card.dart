@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart'; // Required Flutter standard library.
 import 'package:southsea_cinema/constants.dart'; // Global constants for config.
 import 'package:southsea_cinema/models/movie.dart'; // Movie data model.
+import 'package:southsea_cinema/views/movie_listing.dart'; // Page opened by the booking button.
 
 // Stateless as the card only displays the film passed into it.
 class MovieCard extends StatelessWidget {
@@ -79,8 +80,17 @@ class MovieCard extends StatelessWidget {
                       borderRadius: BorderRadius.zero,
                     ),
                   ),
+                  // Push the listing for this card's film on top of the navigation stack.
+                  // The browser back button pops it to return home.
                   onPressed: () {
-                    print('Book now pressed for ${movie.title}');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MovieListing(movie: movie);
+                        },
+                      ),
+                    );
                   },
                   child: const Text('BOOK NOW'),
                 ),

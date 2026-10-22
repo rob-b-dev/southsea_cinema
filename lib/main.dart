@@ -2,7 +2,6 @@ import 'package:flutter/material.dart'; // Required Flutter standard library.
 import 'package:southsea_cinema/constants.dart'; // Global constants for config.
 // Views
 import 'package:southsea_cinema/views/home_view.dart';
-import 'package:southsea_cinema/views/movie_listing.dart';
 
 // Entry point - initialize app.
 void main() {
@@ -42,7 +41,6 @@ class SouthseaCinemaApp extends StatelessWidget {
       routes: {
         // compile-time instances improve performance; views compiled once and reused.
         '/': (context) => const HomeView(),
-        '/listing': (context) => const MovieListing(),
       },
     );
   }
