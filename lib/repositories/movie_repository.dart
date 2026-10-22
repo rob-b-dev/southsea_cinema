@@ -29,4 +29,15 @@ class MovieRepository {
       ),
     ];
   }
+
+  // Returns the film with the matching id, or null if none matches.
+  // Movie? is nullable, so null safety makes callers handle the missing case.
+  Movie? getMovieById(String id) {
+    for (final movie in getMovies()) {
+      if (movie.id == id) {
+        return movie;
+      }
+    }
+    return null;
+  }
 }
