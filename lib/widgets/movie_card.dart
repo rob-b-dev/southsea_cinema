@@ -75,13 +75,7 @@ class MovieCard extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.brand,
-                    foregroundColor: AppColors.textPrimary,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
-                  ),
+                  style: cinemaButtonStyle,
                   // Push the listing for this card's film on top of the navigation stack.
                   // The browser back button pops it to return home.
                   onPressed: () {
