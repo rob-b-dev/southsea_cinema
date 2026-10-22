@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/widgets/movie_card.dart';
 
 const testMovie = Movie(
   id: 'spirited-away',
@@ -18,6 +19,17 @@ void main() {
   testWidgets('Basic app loading test', (WidgetTester tester) async {
     await tester.pumpWidget(const SouthseaCinemaApp());
     expect(find.text('Southsea Cinema'), findsOneWidget);
+  });
+
+  testWidgets('Home page displays movie cards and booking buttons', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const SouthseaCinemaApp());
+
+    expect(find.byType(MovieCard), findsNWidgets(2));
+    expect(find.text('Spirited Away'), findsOneWidget);
+    expect(find.text('Back to the Future'), findsOneWidget);
+    expect(find.text('BOOK NOW'), findsNWidgets(2));
   });
 
   testWidgets('Movie listing shows the film details and booking controls', (
