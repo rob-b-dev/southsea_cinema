@@ -102,6 +102,11 @@ class _MovieListingState extends State<MovieListing> {
 
   List<Widget> _bookingSection() {
     return [
+      Text(
+        'Tickets (${widget.movie.formattedPrice} each)',
+        style: const TextStyle(color: AppColors.textPrimary),
+      ),
+      const SizedBox(height: 12),
       DropdownMenu<int>(
         label: const Text('Tickets'),
         initialSelection: _ticketQuantity,

@@ -20,4 +20,7 @@ class Movie {
     required this.price,
     required this.posterPath,
   });
+
+  // Getter - read like a property (movie.formattedPrice); arrow syntax returns the single expression.
+  String get formattedPrice => '£${price.toStringAsFixed(2)}';
 }
