@@ -25,9 +25,10 @@ class MovieCard extends StatelessWidget {
           children: [
             Text(
               '${movie.title} (${movie.ageRating})',
-              style: cinemaHeaderStyle.copyWith(
+              style: const TextStyle(
                 color: AppColors.brand,
                 fontSize: 22,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 12),
@@ -51,9 +52,15 @@ class MovieCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: Text(movie.screeningTime)),
+                Text(movie.screeningTime),
                 ElevatedButton(
-                  style: cinemaButtonStyle,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.brand,
+                    foregroundColor: AppColors.textPrimary,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                  ),
                   // Push the listing for this card's film on top of the navigation stack.
                   // The browser back button pops it to return home.
                   onPressed: () {

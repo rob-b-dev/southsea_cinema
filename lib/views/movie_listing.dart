@@ -35,17 +35,14 @@ class _MovieListingState extends State<MovieListing> {
         child: Container(
           margin: const EdgeInsets.all(16),
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(16),
-          ),
+          color: AppColors.surface,
           // widget.movie reads the film from the parent StatefulWidget.
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 '${widget.movie.title} (${widget.movie.ageRating})',
-                style: cinemaHeaderStyle.copyWith(fontSize: 26),
+                style: cinemaHeaderStyle,
               ),
               const SizedBox(height: 16),
               Image.asset(
@@ -84,7 +81,13 @@ class _MovieListingState extends State<MovieListing> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                style: cinemaButtonStyle,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.brand,
+                  foregroundColor: AppColors.textPrimary,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
                 onPressed: () {
                   setState(() {
                     _bookingMessage =

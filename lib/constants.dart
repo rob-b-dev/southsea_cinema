@@ -11,14 +11,6 @@ const cinemaHeaderStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-// Shared button style - brand colours with squared corners.
-// final not const as styleFrom is a method call, run once when first used.
-final cinemaButtonStyle = ElevatedButton.styleFrom(
-  backgroundColor: AppColors.brand,
-  foregroundColor: AppColors.textPrimary,
-  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-);
-
 // App colour palette. Placed under class for readability, organisation and scalability.
 // abstract - class cannot be initialised; final - class cannot be extended.
 abstract final class AppColors {
