@@ -24,10 +24,6 @@ final cinemaButtonStyle = ElevatedButton.styleFrom(
 abstract final class AppColors {
   // Brand
   static const brand = Color(0xFF55BEDE); // primary brand colour
-  static const brandLight =
-      Color(0xFF7FCEE6); // lighter variant, e.g. hover states
-  static const brandDark =
-      Color(0xFF3FB5D9); // darker variant, e.g. pressed states
 
   // Surfaces
   static const background = Color(0xFF1B1E28); // screen background
