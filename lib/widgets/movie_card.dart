@@ -15,6 +15,8 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      // Theme's seeded colour scheme is light, so set the dark surface here.
+      color: AppColors.surface,
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
