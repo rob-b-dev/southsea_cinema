@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart'; // Required Flutter standard library.
-import 'package:southsea_cinema/constants.dart'; // Global constants for config.
+import 'package:southsea_cinema/models/movie.dart'; // Movie data model.
+import 'package:southsea_cinema/repositories/movie_repository.dart'; // Supplies film data.
 // Widgets
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/app_bar.dart';
+import 'package:southsea_cinema/widgets/movie_card.dart';
 
 // Home view widget - displayed under '/' route.
 class HomeView extends StatelessWidget {
@@ -14,6 +16,9 @@ class HomeView extends StatelessWidget {
   @override
   // Returns a Widget; Flutter passes in context, this widget's location in the tree.
   Widget build(BuildContext context) {
+    // Ask the repository for the films rather than hard-coding them in the view.
+    final MovieRepository repository = MovieRepository();
+    final List<Movie> movies = repository.getMovies();
 
     // Call Scaffold constructor and return contents to be rendered in widget tree.
     // Scaffold is a high-level widget that provides a standard layout for a page.
@@ -22,24 +27,12 @@ class HomeView extends StatelessWidget {
       
       appBar: const CinemaAppBar(),
       drawer: const NavDrawer(),
-      // Named parameter of Scaffold and 
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Welcome to $appTitle',
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
+      // ListView.builder builds cards lazily, only when they scroll into view.
+      body: ListView.builder(
+        itemCount: movies.length,
+        itemBuilder: (context, index) {
+          return MovieCard(movie: movies[index]);
+        },
       ),
     );
   }
