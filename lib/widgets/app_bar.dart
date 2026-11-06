@@ -1,9 +1,7 @@
-// Shared app bar: defined once and reused by every screen's Scaffold on import.
+import 'package:flutter/material.dart';
+import 'package:southsea_cinema/constants.dart';
 
-import 'package:flutter/material.dart'; // Required Flutter standard library.
-import 'package:southsea_cinema/constants.dart'; // Global constants for config.
-
-// Shared app bar used by every screen.
+// Shared app bar per screen.
 // Implements PreferredSizeWidget because Scaffold's appBar slot requires it.
 class CinemaAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CinemaAppBar({super.key});
@@ -14,12 +12,11 @@ class CinemaAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Return appbar to be wrapped in Scaffold.
+    // Return AppBar to be placed in Scaffold's appBar slot.
     return AppBar(
       title: const Text(appTitle, style: cinemaHeaderStyle),
       backgroundColor: AppColors.surface,
       iconTheme: const IconThemeData(color: AppColors.brand),
-      elevation: 0,
     );
   }
 }

@@ -1,108 +1,90 @@
-import 'package:flutter/material.dart'; // Required Flutter standard library.
-import 'package:southsea_cinema/constants.dart'; // Global constants for config.
-import 'package:southsea_cinema/models/movie.dart'; // Movie data model.
-// Widgets
+import 'package:flutter/material.dart';
+import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/app_bar.dart';
 
-// Movie listing widget - shows the film selected on the home page.
-// Stateful as the ticket quantity and booking message change while the page is open.
+// Movie listing widget; displays the film chosen on the home page. Stateful as ticket quantity and booking message change.
 class MovieListing extends StatefulWidget {
-  final Movie movie; // film passed in from the MovieCard that was tapped
+  final Movie movie; // Film passed in from the MovieCard that was tapped.
 
-  // Const constructor; calls superclass constructor.
   const MovieListing({super.key, required this.movie});
 
+  // Implement abstract createState() method.
   @override
   State<MovieListing> createState() => _MovieListingState();
 }
 
 class _MovieListingState extends State<MovieListing> {
   int _ticketQuantity = 1;
-  String _bookingMessage = '';
+  String _bookingMessage = ''; // Shown after "Add to order"; empty until then.
 
-  // Implements the abstract build method from State.
   @override
-  // Returns a Widget; Flutter passes in context, this widget's location in the tree.
   Widget build(BuildContext context) {
-    // Call Scaffold constructor and return contents to be rendered in widget tree.
-    // Scaffold is a high-level widget that provides a standard layout for a page.
     return Scaffold(
       appBar: const CinemaAppBar(),
       drawer: const NavDrawer(),
       // Scrolls the page on short screens instead of overflowing.
       body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(20),
-          color: AppColors.surface,
-          // widget.movie reads the film from the parent StatefulWidget.
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${widget.movie.title} (${widget.movie.ageRating})',
-                style: cinemaHeaderStyle,
-              ),
-              const SizedBox(height: 16),
-              Image.asset(
-                widget.movie.posterPath,
-                width: 100,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: 16),
-              Text(widget.movie.screeningTime),
-              const SizedBox(height: 8),
-              Text(
-                widget.movie.synopsis,
-                style: const TextStyle(color: AppColors.textMuted),
-              ),
-              const SizedBox(height: 24),
-              Text('Tickets (${widget.movie.formattedPrice} each)'),
-              const SizedBox(height: 12),
-              DropdownMenu<int>(
-                initialSelection: _ticketQuantity,
-                onSelected: (int? value) {
-                  if (value != null) {
-                    // setState rebuilds the page with the chosen quantity.
-                    setState(() {
-                      _ticketQuantity = value;
-                    });
-                  }
-                },
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: 1, label: '1'),
-                  DropdownMenuEntry(value: 2, label: '2'),
-                  DropdownMenuEntry(value: 3, label: '3'),
-                  DropdownMenuEntry(value: 4, label: '4'),
-                  DropdownMenuEntry(value: 5, label: '5'),
-                ],
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.brand,
-                  foregroundColor: AppColors.textPrimary,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
-                ),
-                onPressed: () {
+        padding: const EdgeInsets.all(16),
+        // widget.movie reads the film from the parent StatefulWidget.
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 12, // Same gap between every child.
+          children: [
+            Text(
+              '${widget.movie.title} (${widget.movie.ageRating})',
+              style: cinemaHeaderStyle,
+            ),
+            Image.asset(
+              widget.movie.posterPath,
+              width: 100,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
+            Text(widget.movie.screeningTime),
+            Text(
+              widget.movie.synopsis,
+              style: const TextStyle(color: AppColors.textMuted),
+            ),
+            Text('Tickets (${widget.movie.formattedPrice} each)'),
+            DropdownMenu<int>(
+              initialSelection: _ticketQuantity,
+              onSelected: (int? value) {
+                if (value != null) {
+                  // setState rebuilds the page with the chosen quantity.
                   setState(() {
-                    _bookingMessage =
-                        'Added $_ticketQuantity tickets to the order';
+                    _ticketQuantity = value;
                   });
-                },
-                child: const Text('Add to order'),
+                }
+              },
+              // Collection for; builds one entry per quantity from 1 to 5.
+              dropdownMenuEntries: [
+                for (var i = 1; i <= 5; i++)
+                  DropdownMenuEntry(value: i, label: '$i'),
+              ],
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.brand,
+                foregroundColor: AppColors.textPrimary,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
               ),
-              const SizedBox(height: 12),
-              Text(
-                _bookingMessage,
-                style: const TextStyle(color: AppColors.brand),
-              ),
-            ],
-          ),
+              onPressed: () {
+                setState(() {
+                  _bookingMessage =
+                      'Added $_ticketQuantity tickets to the order';
+                });
+              },
+              child: const Text('Add to order'),
+            ),
+            Text(
+              _bookingMessage,
+              style: const TextStyle(color: AppColors.brand),
+            ),
+          ],
         ),
       ),
     );

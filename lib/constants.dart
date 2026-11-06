@@ -1,5 +1,5 @@
-// Global reusable constants
-// Type annotation unecessary as Dart infers type at compile time.
+// Global reusable constants.
+// Original type annotation removed as Dart infers type at compile time.
 
 import 'package:flutter/material.dart'; // Required Flutter standard library.
 
@@ -11,17 +11,17 @@ const cinemaHeaderStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-// App colour palette. Placed under class for readability, organisation and scalability.
-// abstract - class cannot be initialised; final - class cannot be extended.
+// App colour palette for readability, organisation and scalability.
+// abstract class - cannot be instantiated; final - class cannot be extended.
 abstract final class AppColors {
   // Brand
-  static const brand = Color(0xFF55BEDE); // primary brand colour
+  static const brand = Color(0xFF55BEDE); // Primary brand colour.
 
   // Surfaces
-  static const background = Color(0xFF1B1E28); // screen background
-  static const surface = Color(0xFF242936); // cards and panels
+  static const background = Color(0xFF1B1E28); // Screen background.
+  static const surface = Color(0xFF242936); // Cards and panels.
 
   // Text
-  static const textPrimary = Color(0xFFFFFFFF); // main text
-  static const textMuted = Color(0xFF8A90A0); // secondary text
+  static const textPrimary = Color(0xFFFFFFFF); // Main text.
+  static const textMuted = Color(0xFF8A90A0); // Secondary text.
 }

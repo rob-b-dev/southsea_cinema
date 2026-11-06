@@ -1,11 +1,9 @@
-// Movie repository - supplies film data to the views.
-// Views ask the repository for films, so the data source can change later without changing the UI.
+import 'package:southsea_cinema/models/movie.dart';
 
-import 'package:southsea_cinema/models/movie.dart'; // Movie data model.
-
+// Movie repository; supply film data to views.
 class MovieRepository {
-  // Returns every film currently showing; mock data for now.
   List<Movie> getMovies() {
+    // Return films.
     return const [
       Movie(
         id: 'spirited-away',

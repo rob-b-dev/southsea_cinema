@@ -1,15 +1,13 @@
+
+import 'package:flutter/material.dart';
+import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/views/movie_listing.dart'; // Page opened by booking button.
+
 // Movie card: reusable widget showing one film's details and booking button.
-
-import 'package:flutter/material.dart'; // Required Flutter standard library.
-import 'package:southsea_cinema/constants.dart'; // Global constants for config.
-import 'package:southsea_cinema/models/movie.dart'; // Movie data model.
-import 'package:southsea_cinema/views/movie_listing.dart'; // Page opened by the booking button.
-
-// Stateless as the card only displays the film passed into it.
 class MovieCard extends StatelessWidget {
-  final Movie movie; // film this card displays
+  final Movie movie;
 
-  // Const constructor; movie is required so every card has a film.
   const MovieCard({super.key, required this.movie});
 
   @override
@@ -22,6 +20,7 @@ class MovieCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 12, // Same gap between every child.
           children: [
             Text(
               '${movie.title} (${movie.ageRating})',
@@ -31,10 +30,10 @@ class MovieCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 12),
             // Poster on the left, synopsis on the right.
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 16,
               children: [
                 Image.asset(
                   movie.posterPath,
@@ -42,12 +41,10 @@ class MovieCard extends StatelessWidget {
                   height: 150,
                   fit: BoxFit.cover,
                 ),
-                const SizedBox(width: 16),
                 // Expanded constrains the text to the remaining width so it wraps instead of overflowing.
                 Expanded(child: Text(movie.synopsis)),
               ],
             ),
-            const SizedBox(height: 16),
             // Screening time on the left, booking button pushed to the right.
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,9 +64,7 @@ class MovieCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
-                          return MovieListing(movie: movie);
-                        },
+                        builder: (context) => MovieListing(movie: movie),
                       ),
                     );
                   },
