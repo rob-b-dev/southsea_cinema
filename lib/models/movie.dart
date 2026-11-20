@@ -19,6 +19,30 @@ class Movie {
     required this.posterPath,
   });
 
+  // Builds a Movie from one decoded JSON object.
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      synopsis: json['synopsis'] as String,
+      ageRating: json['ageRating'] as String,
+      screeningTime: json['screeningTime'] as String,
+      // num accepts 6 or 7.5; toDouble() makes both a double.
+      price: (json['price'] as num).toDouble(),
+      posterPath: json['posterPath'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'synopsis': synopsis,
+        'ageRating': ageRating,
+        'screeningTime': screeningTime,
+        'price': price,
+        'posterPath': posterPath,
+      };
+
   // Getter; read as a property, e.g. movie.formattedPrice.
   String get formattedPrice => '£${price.toStringAsFixed(2)}';
 }

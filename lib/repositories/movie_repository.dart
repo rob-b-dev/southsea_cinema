@@ -1,4 +1,6 @@
 import 'package:southsea_cinema/models/movie.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 // Movie repository; supply film data to views.
 class MovieRepository {
@@ -25,6 +27,15 @@ class MovieRepository {
         price: 6.00,
         posterPath: 'assets/images/back_to_the_future.jpg',
       ),
+    ];
+  }
+
+  // Reads the bundled JSON file and converts each object into a Movie.
+  Future<List<Movie>> loadMoviesFromAsset() async {
+    final text = await rootBundle.loadString('assets/data/movies.json');
+    final jsonList = jsonDecode(text) as List<dynamic>;
+    return [
+      for (final item in jsonList) Movie.fromJson(item as Map<String, dynamic>),
     ];
   }
 
