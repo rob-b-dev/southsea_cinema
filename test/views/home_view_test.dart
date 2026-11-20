@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
-import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/views/movie_listing_view.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 
 void main() {
@@ -25,7 +25,7 @@ void main() {
     await tester.tap(find.text('BOOK NOW').first);
     await tester.pumpAndSettle();
 
-    expect(find.byType(MovieListing), findsOneWidget);
+    expect(find.byType(MovieListingView), findsOneWidget);
     expect(find.text('Spirited Away (PG)'), findsOneWidget);
     expect(find.text('Tickets (£7.50 each)'), findsOneWidget);
 

@@ -4,7 +4,8 @@ import 'package:southsea_cinema/constants.dart';
 // Squared button: reusable widget
 class CinemaButton extends StatelessWidget {
   final String label;
-  final VoidCallback onPressed; // Function with no arguments and no return value.
+  final VoidCallback
+      onPressed; // Function with no arguments and no return value.
 
   const CinemaButton({
     super.key,

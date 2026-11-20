@@ -3,19 +3,20 @@ import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/app_bar.dart';
+import 'package:southsea_cinema/widgets/cinema_button.dart';
 
 // Movie listing widget; displays the film chosen on the home page. Stateful as ticket quantity and booking message change.
-class MovieListing extends StatefulWidget {
+class MovieListingView extends StatefulWidget {
   final Movie movie; // Film passed in from the MovieCard that was tapped.
 
-  const MovieListing({super.key, required this.movie});
+  const MovieListingView({super.key, required this.movie});
 
   // Implement abstract createState() method.
   @override
-  State<MovieListing> createState() => _MovieListingState();
+  State<MovieListingView> createState() => _MovieListingState();
 }
 
-class _MovieListingState extends State<MovieListing> {
+class _MovieListingState extends State<MovieListingView> {
   int _ticketQuantity = 1;
   String _bookingMessage = ''; // Shown after "Add to order"; empty until then.
 
@@ -28,9 +29,7 @@ class _MovieListingState extends State<MovieListing> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         // widget.movie reads the film from the parent StatefulWidget.
-        child: 
-        // Possibly wrap column in container to give border.all style?
-        Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 12, // Same gap between every child.
           children: [
@@ -66,21 +65,14 @@ class _MovieListingState extends State<MovieListing> {
                   DropdownMenuEntry(value: i, label: '$i'),
               ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.brand,
-                foregroundColor: AppColors.textPrimary,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
-              ),
+            CinemaButton(
+              label: 'Add to order',
               onPressed: () {
                 setState(() {
                   _bookingMessage =
                       'Added $_ticketQuantity tickets to the order';
                 });
               },
-              child: const Text('Add to order'),
             ),
             Text(
               _bookingMessage,

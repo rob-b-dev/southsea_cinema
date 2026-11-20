@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
       appBar: const CinemaAppBar(),
       drawer: const NavDrawer(),
       body: ListView(
-        children:[
+        children: [
           for (final movie in movies) MovieCard(movie: movie),
         ],
       ),
