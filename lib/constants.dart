@@ -1,6 +1,3 @@
-// Global reusable constants.
-// Original type annotation removed as Dart infers type at compile time.
-
 import 'package:flutter/material.dart'; // Required Flutter standard library.
 
 const appTitle = 'Southsea Cinema';
@@ -11,8 +8,7 @@ const cinemaHeaderStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-// App colour palette for readability, organisation and scalability.
-// abstract class - cannot be instantiated; final - class cannot be extended.
+// abstract class: cannot be instantiated; final: cannot be extended.
 abstract final class AppColors {
   // Brand
   static const brand = Color(0xFF55BEDE); // Primary brand colour.

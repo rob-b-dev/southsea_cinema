@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart'; // Required Flutter standard library.
 import 'package:southsea_cinema/constants.dart'; // Global constants for config.
 
-// Side menu shared by every screen.
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
 
@@ -56,7 +55,7 @@ class DrawerTile extends StatelessWidget {
     return ListTile(
       title: Text(title, style: const TextStyle(color: AppColors.textPrimary)),
       onTap: () {
-        Navigator.pop(context); // Close the drawer first.
+        Navigator.pop(context); // Close drawer first.
         Navigator.pushNamed(context, route);
       },
     );

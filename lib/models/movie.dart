@@ -1,12 +1,10 @@
-// Movie data model - defines the shape of one film's data.
 class Movie {
-  // Final fields - values cannot change once a Movie is created.
-  final String id; // Unique key used to find a film, e.g. 'spirited-away'.
+  final String id;
   final String title;
   final String synopsis;
   final String ageRating;
   final String screeningTime;
-  final double price; // double for floating point values.
+  final double price;
   final String posterPath; // Must match a file in assets/images/.
 
   const Movie({
@@ -22,7 +20,7 @@ class Movie {
   // Builds a Movie from one decoded JSON object.
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
-      id: json['id'] as String,
+      id: json['id'] as String, // Type cast; check at runtime when known
       title: json['title'] as String,
       synopsis: json['synopsis'] as String,
       ageRating: json['ageRating'] as String,

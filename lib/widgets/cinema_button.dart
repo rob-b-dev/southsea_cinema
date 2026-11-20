@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 
-// Squared button: reusable widget
 class CinemaButton extends StatelessWidget {
   final String label;
   final VoidCallback

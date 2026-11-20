@@ -8,7 +8,7 @@ import 'package:southsea_cinema/widgets/app_bar.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-// Movie listing widget; displays the film chosen on the home page. Stateful as ticket quantity and booking message change.
+// Movie listing widget; displays film chosen on the home page.
 class MovieListingView extends StatefulWidget {
   final Movie movie; // Film passed in from the MovieCard that was tapped.
 

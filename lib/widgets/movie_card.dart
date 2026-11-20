@@ -4,7 +4,6 @@ import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/views/movie_listing_view.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
 
-// Movie card: reusable widget showing one film's details and booking button.
 class MovieCard extends StatelessWidget {
   final Movie movie;
 
@@ -13,7 +12,6 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // Theme's seeded colour scheme is light, so set the dark surface here.
       color: AppColors.surface,
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Padding(
@@ -30,7 +28,6 @@ class MovieCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            // Poster on the left, synopsis on the right.
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
@@ -41,11 +38,9 @@ class MovieCard extends StatelessWidget {
                   height: 150,
                   fit: BoxFit.cover,
                 ),
-                // Expanded constrains the text to the remaining width so it wraps instead of overflowing.
                 Expanded(child: Text(movie.synopsis)),
               ],
             ),
-            // Screening time on the left, booking button pushed to the right.
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

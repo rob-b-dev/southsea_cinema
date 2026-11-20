@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 
-// Shared app bar per screen.
 // Implements PreferredSizeWidget because Scaffold's appBar slot requires it.
 class CinemaAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CinemaAppBar({super.key});
