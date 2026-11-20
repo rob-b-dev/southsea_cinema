@@ -24,7 +24,7 @@ void main() {
   });
 
   // One booking test is generated per film.
-    for (final (title, price) in films) {
+  for (final (title, price) in films) {
     testWidgets('Booking $title opens its listing and adds to order', (
       WidgetTester tester,
     ) async {
