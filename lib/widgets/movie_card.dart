@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
-import 'package:southsea_cinema/views/movie_listing.dart'; // Page opened by booking button.
+import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/widgets/cinema_button.dart';
+
 
 // Movie card: reusable widget showing one film's details and booking button.
 class MovieCard extends StatelessWidget {
@@ -46,31 +48,19 @@ class MovieCard extends StatelessWidget {
               ],
             ),
             // Screening time on the left, booking button pushed to the right.
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(movie.screeningTime),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.brand,
-                    foregroundColor: AppColors.textPrimary,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
-                  ),
-                  // Push the listing for this card's film on top of the navigation stack.
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MovieListing(movie: movie),
-                      ),
-                    );
-                  },
-                  child: const Text('BOOK NOW'),
-                ),
-              ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+            Text(movie.screeningTime),
+            CinemaButton(
+              label: 'BOOK NOW',
+              onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MovieListing(movie: movie)),
             ),
+            ),
+          ],
+        ),
           ],
         ),
       ),
