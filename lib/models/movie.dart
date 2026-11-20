@@ -42,7 +42,4 @@ class Movie {
         'price': price,
         'posterPath': posterPath,
       };
-
-  // Getter; read as a property, e.g. movie.formattedPrice.
-  String get formattedPrice => '£${price.toStringAsFixed(2)}';
 }

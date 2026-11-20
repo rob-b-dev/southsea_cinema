@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/repositories/basket_repository.dart';
+import 'package:southsea_cinema/utils/format_price.dart';
 import 'package:southsea_cinema/widgets/app_bar.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
@@ -39,7 +40,7 @@ class _BasketViewState extends State<BasketView> {
                   Expanded(
                     child: Text(
                       '${item.quantity} x ${item.movie.title} - '
-                      '£${item.lineTotal.toStringAsFixed(2)}',
+                      '${formatPrice(item.lineTotal)}',
                     ),
                   ),
                   IconButton(
@@ -50,7 +51,7 @@ class _BasketViewState extends State<BasketView> {
               ),
             // Spread (...) inserts both widgets only when the basket has items.
             if (items.isNotEmpty) ...[
-              Text('Total: £${_basket.total.toStringAsFixed(2)}'),
+              Text('Total: ${formatPrice(_basket.total)}'),
               CinemaButton(
                 label: 'Checkout',
                 onPressed: () => setState(() {

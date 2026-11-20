@@ -3,9 +3,10 @@ import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/models/ticket_item.dart';
 import 'package:southsea_cinema/repositories/basket_repository.dart';
-import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/utils/format_price.dart';
 import 'package:southsea_cinema/widgets/app_bar.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
+import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 // Movie listing widget; displays the film chosen on the home page. Stateful as ticket quantity and booking message change.
 class MovieListingView extends StatefulWidget {
@@ -15,10 +16,10 @@ class MovieListingView extends StatefulWidget {
 
   // Implement abstract createState() method.
   @override
-  State<MovieListingView> createState() => _MovieListingState();
+  State<MovieListingView> createState() => _MovieListingViewState();
 }
 
-class _MovieListingState extends State<MovieListingView> {
+class _MovieListingViewState extends State<MovieListingView> {
   int _ticketQuantity = 1;
   String _bookingMessage = ''; // Shown after "Add to order"; empty until then.
 
@@ -50,7 +51,7 @@ class _MovieListingState extends State<MovieListingView> {
               widget.movie.synopsis,
               style: const TextStyle(color: AppColors.textMuted),
             ),
-            Text('Tickets (${widget.movie.formattedPrice} each)'),
+            Text('Tickets (${formatPrice(widget.movie.price)} each)'),
             DropdownMenu<int>(
               initialSelection: _ticketQuantity,
               onSelected: (int? value) {
