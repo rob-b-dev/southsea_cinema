@@ -59,7 +59,6 @@ class MovieCard extends StatelessWidget {
                     ),
                   ),
                   // Push the listing for this card's film on top of the navigation stack.
-                  // The browser back button pops it to return home.
                   onPressed: () {
                     Navigator.push(
                       context,

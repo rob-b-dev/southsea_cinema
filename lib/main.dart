@@ -23,15 +23,21 @@ class SouthseaCinemaApp extends StatelessWidget {
       title: '$appTitle & Arts Centre',
       debugShowCheckedModeBanner: false,
       // App-wide styling; any widget below can read it with Theme.of(context).
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: AppColors.background,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.brand,
-          primary: AppColors.textPrimary,
-          surface: AppColors.surface,
-        ),
-      ),
-      // Named routes; '/' is the default start route.
+    theme: ThemeData.dark().copyWith(
+      scaffoldBackgroundColor: AppColors.background,
+      colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.brand,
+      primary: AppColors.textPrimary,
+      surface: AppColors.surface,
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.surface,
+      iconTheme: IconThemeData(color: AppColors.brand),
+      titleTextStyle: cinemaHeaderStyle,
+      elevation: 0,
+    ),
+  ),
+  // Named routes; '/' is the default start route.
       routes: {
         '/': (context) => const HomeView(),
       },

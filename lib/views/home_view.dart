@@ -20,12 +20,10 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: const CinemaAppBar(),
       drawer: const NavDrawer(),
-      // ListView.builder; named constructor that builds cards lazily as they scroll into view.
-      body: ListView.builder(
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          return MovieCard(movie: movies[index]);
-        },
+      body: ListView(
+        children:[
+          for (final movie in movies) MovieCard(movie: movie),
+        ],
       ),
     );
   }

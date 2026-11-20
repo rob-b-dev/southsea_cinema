@@ -28,7 +28,9 @@ class _MovieListingState extends State<MovieListing> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         // widget.movie reads the film from the parent StatefulWidget.
-        child: Column(
+        child: 
+        // Possibly wrap column in container to give border.all style?
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 12, // Same gap between every child.
           children: [
