@@ -1,30 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/repositories/movie_repository.dart';
-import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/app_bar.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
+import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-// Home view widget.
-class HomeView extends StatelessWidget {
+// Home page; stateful because films load asynchronously from the JSON asset.
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Ask repository for films rather than hard-coding them in the view.
-    final MovieRepository repository = MovieRepository();
-    final List<Movie> movies = repository.getMovies();
+  State<HomeView> createState() => _HomeViewState();
+}
 
-    // Call Scaffold constructor and return contents.
-    // Scaffold gives the screen its standard layout: app bar, drawer and body slots.
+class _HomeViewState extends State<HomeView> {
+  // Both null while loading; one is set when loading finishes.
+  List<Movie>? _movies;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMovies(); // initState can't be async, so it starts the load here.
+  }
+
+  Future<void> _loadMovies() async {
+    try {
+      final movies = await MovieRepository().loadMoviesFromAsset();
+      // The user may have left the page during the await.
+      if (!mounted) return;
+      setState(() => _movies = movies);
+    } catch (error) {
+      if (!mounted) return;
+      setState(() => _error = 'Could not load films: $error');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Local copies let Dart promote the nullable fields after the null checks.
+    final movies = _movies;
+    final error = _error;
+
+    final Widget body;
+    if (error != null) {
+      body = Center(child: Text(error));
+    } else if (movies == null) {
+      body = const Center(child: CircularProgressIndicator());
+    } else {
+      body = ListView(
+        children: [for (final movie in movies) MovieCard(movie: movie)],
+      );
+    }
+
     return Scaffold(
       appBar: const CinemaAppBar(),
       drawer: const NavDrawer(),
-      body: ListView(
-        children: [
-          for (final movie in movies) MovieCard(movie: movie),
-        ],
-      ),
+      body: body,
     );
   }
 }

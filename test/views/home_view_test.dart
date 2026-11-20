@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/main.dart';
 import 'package:southsea_cinema/views/movie_listing_view.dart';
@@ -10,10 +11,14 @@ const films = [
 ];
 
 void main() {
+  // Stops one test reusing another test's unfinished asset read.
+  setUp(rootBundle.clear);
+
   testWidgets('Home page displays its title, movie cards and booking buttons', (
     WidgetTester tester,
   ) async {
     await tester.pumpWidget(const SouthseaCinemaApp());
+    await tester.pumpAndSettle(); // Wait for the JSON films to load.
 
     expect(find.text('Southsea Cinema'), findsOneWidget);
     expect(find.byType(MovieCard), findsNWidgets(films.length));
@@ -29,13 +34,14 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
 
       // BOOK NOW button inside the card showing this title.
       final bookNow = find.descendant(
         of: find.widgetWithText(MovieCard, title),
         matching: find.text('BOOK NOW'),
       );
-      await tester.ensureVisible(bookNow); // Scroll it on-screen first.
+      await tester.ensureVisible(bookNow);
       await tester.pumpAndSettle();
       await tester.tap(bookNow);
       await tester.pumpAndSettle();
