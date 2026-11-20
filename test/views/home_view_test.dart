@@ -24,19 +24,20 @@ void main() {
   });
 
   // One booking test is generated per film.
-  for (final (title, price) in films) {
+    for (final (title, price) in films) {
     testWidgets('Booking $title opens its listing and adds to order', (
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
 
-      // Tap the BOOK NOW button inside the card showing this title.
-      await tester.tap(
-        find.descendant(
-          of: find.widgetWithText(MovieCard, title),
-          matching: find.text('BOOK NOW'),
-        ),
+      // BOOK NOW button inside the card showing this title.
+      final bookNow = find.descendant(
+        of: find.widgetWithText(MovieCard, title),
+        matching: find.text('BOOK NOW'),
       );
+      await tester.ensureVisible(bookNow); // Scroll it on-screen first.
+      await tester.pumpAndSettle();
+      await tester.tap(bookNow);
       await tester.pumpAndSettle();
 
       expect(find.byType(MovieListingView), findsOneWidget);
